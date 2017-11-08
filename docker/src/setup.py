@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(name='assistance',
           version='0.1.0.dev0',
-          description='Sistema de Asistencia',
+          description='Proyecto que maneja el nuevo sistema de asistencia',
           url='https://github.com/pablodanielrey/assistance',
           author='Desarrollo DiTeSi, FCE',
           author_email='ditesi@econo.unlp.edu.ar',
@@ -26,17 +26,24 @@ setup(name='assistance',
             'Programming Language :: Python :: 3.5'
           ],
           packages=find_packages(exclude=['contrib', 'docs', 'test*']),
-          install_requires=['psycopg2>=2.7.1',
+          install_requires=['psycopg2',
                             'dateutils>=0.6.6',
+                            'requests',
                             'redis',
                             'Flask',
                             'flask_jsontools',
-                            'SQLAlchemy'],
+                            'Flask-OIDC',
+                            'SQLAlchemy',
+                            'google-api-python-client',
+                            'httplib2',
+                            'pyjwt',
+                            'redis',
+                            'microservices_common'],
           entry_points={
             'console_scripts': [
-                'wamp=sileg.api.wamp.main:main',
-                'rest=sileg.api.rest.main:main',
-                'flask=sileg.web.main:main'
+                'wamp=assistance.api.wamp.main:main',
+                'rest=asssitance.api.rest.main:main',
+                'flask=assistance.web.main:main'
             ]
           }
 
