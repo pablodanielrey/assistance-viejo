@@ -1,0 +1,29 @@
+import sys
+import os
+import psycopg2
+
+class AssistanceModel:
+
+    host = os.environ['ASSISTANCE_DB_OLD_HOST']
+    user = os.environ['ASSISTANCE_DB_OLD_USER']
+    passwd = os.environ['ASSISTANCE_DB_OLD_PASSWORD']
+    base = os.environ['ASSISTANCE_DB_OLD_NAME']
+
+    @classmethod
+    def obtenerLAO(cls, uid):
+        con = psycopg2.connect(host=cls.host, user=cls.user, password=cls.passwd, database=cls.base)
+        try:
+            cur = con.cursor()
+            try:
+                cur.execute("""
+                    SELECT user_id, sdate, notes
+                    FROM assistance.worked_notes
+                    WHERE notes ILIKE  'lao' and user_id = %s
+                    ORDER BY sdate desc
+                """,(uid, ))
+
+                return [{'usuario_id': row[0], 'fecha': row[1]} for row in cur.fetchall()]
+            finally:
+                cur.close()
+        finally:
+            con.close()
