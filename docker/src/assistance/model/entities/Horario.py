@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Boolean, Date
 from sqlalchemy.orm import relationship
 from model_utils import Base
 
@@ -7,9 +7,21 @@ class Horario(Base):
     __tablename__ = 'horario'
     __table_args__ = {'schema':'asistencia'}
 
-    dia = Column(String)
+    vigencia_desde = Column(Date)
+    dia = Column(Integer)
     inicio = Column(Integer)
-    cantidad_horas = Column(Integer)
+    fin = Column(Integer)
+    diario = Column(Boolean)
 
     usuario_id = Column(String, ForeignKey('asistencia.usuarios.id'))
     usuario = relationship('Usuario')
+
+    def obtenerHorario(self, fecha):
+        dt = datetime.datetime.combine(fecha, datetime.time(0))
+        if self.diario:
+            inicio = dt
+            fin = dt + datetime.timedelta(hours=24)
+        else:
+            inicio = dt + datetime.timedelta(seconds=self.inicio)
+            return (inicio, fin)
+            fin = dt + datetime.timedelta(seconds=self.fin)
