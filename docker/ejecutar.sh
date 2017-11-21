@@ -1,4 +1,4 @@
 #!/bin/bash
-sudo docker run -ti -d --name users -v $(pwd)/src:/src -p 5005:5000 -p 5006:5001 -p 5007:5002 -p 5008:5003 --env-file $HOME/gitlab/fce/produccion/users users
-sudo docker exec -t users bash instalar.sh
-sudo docker restart users
+sudo docker run -ti -d --name assistance -v $(pwd)/src:/src -p 5040:5000 -p 5041:5001 -p 5042:5002 -p 5043:5003 --env-file $HOME/gitlab/fce/produccion/assistance assistance
+sudo docker exec -t assistance bash instalar.sh
+sudo docker restart assistance
