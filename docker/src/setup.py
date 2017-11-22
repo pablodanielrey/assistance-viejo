@@ -42,7 +42,7 @@ setup(name='assistance',
           entry_points={
             'console_scripts': [
                 'wamp=assistance.api.wamp.main:main',
-                'rest=asssitance.api.rest.main:main',
+                'rest=assistance.api.rest.main:main',
                 'flask=assistance.web.main:main'
             ]
           }
