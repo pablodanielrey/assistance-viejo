@@ -1,6 +1,7 @@
 import sys
 import os
 import psycopg2
+import datetime
 
 class AssistanceModel:
 
@@ -10,7 +11,7 @@ class AssistanceModel:
     base = os.environ['ASSISTANCE_DB_OLD_NAME']
 
     @classmethod
-    def obtenerLAO(cls, uid):
+    def obtenerLAO(cls, uid, sdate, edate=datetime.date.today()):
         con = psycopg2.connect(host=cls.host, user=cls.user, password=cls.passwd, database=cls.base)
         try:
             cur = con.cursor()
@@ -18,9 +19,9 @@ class AssistanceModel:
                 cur.execute("""
                     SELECT user_id, sdate, notes
                     FROM assistance.worked_notes
-                    WHERE notes ILIKE  'lao' and user_id = %s
+                    WHERE notes ILIKE  'lao' and user_id = %s and sdate >= %s and sdate <= %s
                     ORDER BY sdate desc
-                """,(uid, ))
+                """,(uid, sdate, edate))
 
                 return [{'usuario_id': row[0], 'fecha': row[1]} for row in cur.fetchall()]
             finally:
