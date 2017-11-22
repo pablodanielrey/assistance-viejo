@@ -33,5 +33,5 @@ class Horario(Base):
             fin = dt + datetime.timedelta(hours=24)
         else:
             inicio = dt + datetime.timedelta(seconds=self.inicio)
-            return (inicio, fin)
             fin = dt + datetime.timedelta(seconds=self.fin)
+        return (inicio, fin)

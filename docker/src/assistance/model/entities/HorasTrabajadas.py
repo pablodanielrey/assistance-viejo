@@ -3,6 +3,7 @@
 class HorasTrabajadas:
 
     TOLERANCIA_DUPLICADA = 5                # en minutos
+    TOLERANCIA_DIARIA = 60                  # en minutos
 
     def __init__(self, fecha, logs=[], inicio=None, fin=None):
         self.fecha = fecha
@@ -19,14 +20,17 @@ class HorasTrabajadas:
         h = session.query(Horario).filter(Horario.usuario_id = uid, Horario.dia = fecha.weekday()).one_or_none()
         if not h:
             return None
-        inicio, fin = hs.obtenerHorario(fecha)
+        inicio, fin = h.obtenerHorario(fecha)
 
         hs = []
         ls = []
         tolerancia = datetime.timedelta(minutes=cls.TOLERANCIA_DUPLICADA)
+        toleranciaDiaria = datetime.timedelta() if h.diario else datetime.timedelta(minutes=cls.TOLERANCIA_DIARIA)
+
+        tinicio, tfin = inicio - toleranciaDiaria, fin + toleranciaDiaria
 
         ''' agrupo por tolerancia los logs '''
-        for l in session.query(AttLog).filter(AttLog.log >= inicio, AttLog.log <= fin).all():
+        for l in session.query(AttLog).filter(AttLog.log >= tinicio, AttLog.log <= tfin).all():
             try:
                 grupo = ls[-1]
                 ultimo = grupo[0].log + tolerancia
@@ -37,6 +41,8 @@ class HorasTrabajadas:
 
             except IndexError as e:
                 ls.append([l])
+        if len(ls) % 2 > 0:
+            ls.append(None)
 
         hs = []
 
