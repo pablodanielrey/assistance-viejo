@@ -13,7 +13,7 @@ class Horario(Base):
     fin = Column(Integer)
     diario = Column(Boolean)
 
-    usuario_id = Column(String, ForeignKey('asistencia.usuarios.id'))
+    usuario_id = Column(String, ForeignKey('asistencia.usuario.id'))
     usuario = relationship('Usuario')
 
 

@@ -3,6 +3,10 @@ import os
 import psycopg2
 import datetime
 
+from . import Session
+
+from .entities import *
+
 class AssistanceModel:
 
     host = os.environ['ASSISTANCE_DB_OLD_HOST']
@@ -28,3 +32,8 @@ class AssistanceModel:
                 cur.close()
         finally:
             con.close()
+
+    @classmethod
+    def generarReporte(cls, inicio, fin, uids):
+        session = Session()
+        return Reporte.generarReporte(session, inicio, fin, uids)

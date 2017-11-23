@@ -1,4 +1,4 @@
-
+from . import *
 
 class HorasTrabajadas:
 
@@ -16,8 +16,8 @@ class HorasTrabajadas:
 
 
     @classmethod
-    def obtenerHorasTrabajadas(cls, session, uid, fecha):
-        h = session.query(Horario).filter(Horario.usuario_id = uid, Horario.dia = fecha.weekday()).one_or_none()
+    def obtenerHorasTrabajadas(cls, session, h, uid, fecha):
+
         if not h:
             return None
         inicio, fin = h.obtenerHorario(fecha)
