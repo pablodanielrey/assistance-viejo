@@ -1,0 +1,14 @@
+<div> Horas trabajadas: {{ nuevoReporte.total_segundos_trabajados }} </div>
+<div> Fecha: {{nuevoReporte.fecha}} </div>
+
+<input [(ngModel)]="nuevoReporte.total_segundos_trabajados" placeholder="horas trabajadas">
+
+<button (click)="agregarReporte()">Agregar</button>  
+
+<ul>
+  <li *ngFor="let reporte of reportes" >
+    <div> Horas trabajadas: {{ reporte.total_segundos_trabajados }} </div>
+    <div> Fecha: {{reporte.fecha}} </div>
+    <input [(ngModel)]="reporte.total_segundos_trabajados" placeholder="horas trabajadas">
+  </li>
+</ul>
