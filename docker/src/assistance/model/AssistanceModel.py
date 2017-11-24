@@ -34,6 +34,12 @@ class AssistanceModel:
             con.close()
 
     @classmethod
-    def generarReporte(cls, inicio, fin, uids):
+    def generarReporte(cls, inicio, fin, uid):
         session = Session()
-        return Reporte.generarReporte(session, inicio, fin, uids)
+        return Reporte.generarReporte(session, inicio, fin, uid)
+
+
+    @classmethod
+    def generarReporteUsuarios(cls, inicio, fin, uids):
+        session = Session()
+        return Reporte.generarReporteUsuarios(session, inicio, fin, uids)

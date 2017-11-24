@@ -1,6 +1,8 @@
 from . import *
 
-class HorasTrabajadas:
+from model_utils import MyJsonBaseClass
+
+class HorasTrabajadas(MyJsonBaseClass):
 
     TOLERANCIA_DUPLICADA = 5                # en minutos
     TOLERANCIA_DIARIA = 60                  # en minutos
