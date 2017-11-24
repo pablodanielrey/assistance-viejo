@@ -17,3 +17,10 @@ class AttLog(Base):
     usuario_id = Column(String)
     #usuario_id = Column(String, ForeignKey('profile.users.id'))
     #usuario = relationship('Usuario')
+
+
+    def __init__(self, usuario_id=None, dispositivo_id=None, log=None, modo_verificacion=None):
+        self.usuario_id = usuario_id
+        self.dispositivo_id = dispositivo_id
+        self.modo_verificacion = modo_verificacion
+        self.log = log
