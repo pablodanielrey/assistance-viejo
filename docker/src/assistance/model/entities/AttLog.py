@@ -5,7 +5,7 @@ from model_utils import Base
 class AttLog(Base):
 
     __tablename__ = 'attlog'
-    __table_args__ = {'schema':'asistencia'}
+    __table_args__ = {'schema':'assistance'}
 
     modo_verificacion = Column(Integer)
     log = Column(DateTime(timezone=True))

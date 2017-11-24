@@ -26,5 +26,5 @@ def crear_tablas():
     from .entities import AttLog, Horario, Usuario
     from sqlalchemy.schema import CreateSchema
 
-    #engine.execute(CreateSchema('asistencia'))
+    #engine.execute(CreateSchema('assistance'))
     Base.metadata.create_all(engine)

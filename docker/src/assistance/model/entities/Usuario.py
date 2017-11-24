@@ -11,7 +11,7 @@ import requests
 class Usuario(Base):
 
     __tablename__ = 'usuario'
-    __table_args__ = {'schema':'asistencia'}
+    __table_args__ = {'schema':'assistance'}
 
     def resolveUser(self):
         ''' se hace la llamada rest a la api de usuarios '''

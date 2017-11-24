@@ -5,7 +5,7 @@ from model_utils import Base
 class Horario(Base):
 
     __tablename__ = 'horario'
-    __table_args__ = {'schema':'asistencia'}
+    __table_args__ = {'schema':'assistance'}
 
     vigencia_desde = Column(Date)
     dia = Column(Integer)
@@ -13,7 +13,7 @@ class Horario(Base):
     fin = Column(Integer)
     diario = Column(Boolean)
 
-    usuario_id = Column(String, ForeignKey('asistencia.usuario.id'))
+    usuario_id = Column(String, ForeignKey('assistance.usuario.id'))
     usuario = relationship('Usuario')
 
 
