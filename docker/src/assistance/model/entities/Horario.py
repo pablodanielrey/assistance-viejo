@@ -16,6 +16,14 @@ class Horario(Base):
     usuario_id = Column(String, ForeignKey('assistance.usuario.id'))
     usuario = relationship('Usuario')
 
+    def __init__(self, usuario_id=None, vigencia_desde=None, dia=0, inicio=None, fin=None, diario=False):
+        self.usuario_id = usuario_id
+        self.vigencia_desde = vigencia_desde
+        self.dia = dia
+        self.inicio = inicio
+        self.fin = fin
+        self.diario = diario
+
 
     def obtenerInicio(self, date):
         return date.replace(seconds=0, hour=0, minute=0) + datetime.timedelta(seconds=self.inicio)
