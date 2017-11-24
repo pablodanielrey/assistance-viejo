@@ -5,8 +5,7 @@ import { AsistenciaService } from '../asistencia.service';
 @Component({
   selector: 'app-reporte-lista',
   templateUrl: './reporte-lista.component.html',
-  styleUrls: ['./reporte-lista.component.css'],
-  providers: [AsistenciaService]
+  styleUrls: ['./reporte-lista.component.css']
 })
 export class ReporteListaComponent implements OnInit {
 
