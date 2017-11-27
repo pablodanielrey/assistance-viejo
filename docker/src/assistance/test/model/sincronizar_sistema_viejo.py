@@ -54,8 +54,19 @@ if __name__ == '__main__':
             s.add(h)
             s.commit()
 
+    lastDate = None
+    try:
+        lastLog = s.query(AttLog).order_by(AttLog.log.desc()).first()
+        lastDate = lastLog.log
+    except Exception as e:
+        logging.info('error obteniendo el ultimo log - se sincronizaran todos los existentes')
 
-    rs = engine.execute('select id, device_id, user_id, verifymode, log, created from assistance.attlog')
+    rs = None
+    if lastDate:
+        rs = engine.execute('select id, device_id, user_id, verifymode, log, created from assistance.attlog where log >= %s', (lastDate,))
+    else:
+        rs = engine.execute('select id, device_id, user_id, verifymode, log, created from assistance.attlog')
+
     for r in rs:
         uid = r[2]
         did = r[1]
@@ -76,5 +87,5 @@ if __name__ == '__main__':
             s.add(log)
             s.commit()
 
-    for l in s.query(AttLog).all():
-        logging.info(l.__json__())
+    #for l in s.query(AttLog).all():
+    #    logging.info(l.__json__())

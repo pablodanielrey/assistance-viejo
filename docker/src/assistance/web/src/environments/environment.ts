@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
 
-  assistanceApiUrl: 'http://asistencia.econo.unlp.edu.ar:5041/assistance/api/v1.0'
+  assistanceApiUrl: 'http://127.0.0.1:5041/assistance/api/v1.0'
 
 };

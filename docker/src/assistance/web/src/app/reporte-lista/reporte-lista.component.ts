@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Reporte } from '../reporte';
+import { Reporte } from '../entities/reporte';
 import { AsistenciaService } from '../asistencia.service';
 
 
@@ -24,6 +24,12 @@ export class ReporteListaComponent implements OnInit {
     var sdate = new Date();
     var edate = new Date();
     let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);
+    respuesta.then(reporte => {
+      for (let r of reporte) {
+          console.log('report:');
+          console.log(r);
+      }
+    });
   }
 
   agregarReporte() {

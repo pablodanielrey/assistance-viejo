@@ -9,4 +9,5 @@ export class Reporte {
   contructor(values: Object = {}) {
       Object.assign(this, values)
   }
+
 }

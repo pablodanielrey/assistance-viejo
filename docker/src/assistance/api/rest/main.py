@@ -1,5 +1,5 @@
 import logging
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.DEBUG)
 import sys
 from dateutil import parser
 
@@ -38,6 +38,15 @@ def obtenerReporte(uid):
     fin = parser.parse(fin_str) if fin_str else datetime.date.today()
 
     return AssistanceModel.generarReporte(inicio, fin, uid)
+
+
+@app.after_request
+def cors_after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
+
 
 def main():
     app.run(host='0.0.0.0', port=5001, debug=True)
