@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Boolean, Date
 from sqlalchemy.orm import relationship
 from model_utils import Base
+import datetime
 
 class Horario(Base):
 

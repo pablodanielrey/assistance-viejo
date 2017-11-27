@@ -1,6 +1,7 @@
 from . import *
 
 from model_utils import MyJsonBaseClass
+import datetime
 
 class HorasTrabajadas(MyJsonBaseClass):
 
@@ -51,10 +52,10 @@ class HorasTrabajadas(MyJsonBaseClass):
         ''' agrupo de a 2 los grupos de tolernacia y los asigno a horas trabajadas '''
         for linicio, lfin in [(ls[i],ls[i+1]) for i in range(0,len(ls),2)]:
             h = None
-            if len(lfin) <= 0:
-                h = HorasTrabajadas(fecha, logs=linicio, inicio=linicio[0], fin=None)
+            if lfin is None or len(lfin) <= 0:
+                h = HorasTrabajadas(fecha, logs=linicio, inicio=linicio[0].log, fin=None)
             else:
-                h = HorasTrabajadas(fecha, logs=linicio.extend(lfin), inicio=linicio[0], fin=lfin[-1])
+                h = HorasTrabajadas(fecha, logs=linicio.extend(lfin), inicio=linicio[0].log, fin=lfin[-1].log)
             hs.append(h)
 
         return hs

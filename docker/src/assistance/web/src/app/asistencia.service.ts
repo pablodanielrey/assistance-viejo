@@ -41,7 +41,12 @@ export class AsistenciaService {
           res => {
             //console.log(res.json());
             console.log(res);
-            resolve(res.map((k) => new Reporte(k)))
+            let r = res[0];
+            let rep = new Reporte(r);
+            rep.initialize(r);
+            console.log(r['total_segundos_trabajados']);
+            console.log(rep);
+            resolve(res.map(k => new Reporte(k)));
           }
         )
     });

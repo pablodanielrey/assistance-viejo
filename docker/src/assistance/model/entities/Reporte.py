@@ -30,7 +30,7 @@ class Reporte(MyJsonBaseClass):
             q = session.query(Horario)
             q = q.filter(Horario.usuario_id == uid, Horario.dia == actual.weekday(), Horario.vigencia_desde <= actual.date())
             q = q.order_by(Horario.vigencia_desde.desc())
-            horario = q.one_or_none()
+            horario = q.limit(1).one_or_none()
 
             ht = HorasTrabajadas.obtenerHorasTrabajadas(session, horario, uid, actual)
             ht = [] if ht is None else ht
