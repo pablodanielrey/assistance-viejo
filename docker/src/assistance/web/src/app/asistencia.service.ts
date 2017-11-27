@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 
 import { Reporte } from './reporte';
-import { Http, Response } from '@angular/http';
-import { HttpParams, HttpClient } from '@angular/common/http';
+// import { Http, Response } from '@angular/http';
+// import { HttpParams, HttpClient } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
+// import { HttpModule } from '@angular/http';
+
+import {HttpModule, Http, Response} from '@angular/http';
 
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/toPromise';
 
 
 const ASSISTANCE_API_URL = environment.assistanceApiUrl;
@@ -21,18 +26,18 @@ export class AsistenciaService {
 
   constructor(private http: Http) { }
 
-  buscarReporte(uid: string, sdate: Date, edate: Date): Observable<Reporte[]> {
-    let params =  new HttpParams();
-    params.append('sdate', sdate.toString());
-    params.append('edate', edate.toString());
-
-    return this.http
-      .get(ASSISTANCE_API_URL + '/usuarios/' + uid + '/reporte/', {params: params})
-      .map(response => {
-        const reportes = response.json();
-        return reportes.map((r) => new Reporte(r));
-      })
-      .catch(this.handleError);
+  buscarReporte(uid: string, sdate: Date, edate: Date): Promise<Reporte[]> {
+    return new Promise((resolve, reject) => {
+      let apiUrl = `${ASSISTANCE_API_URL}/usuarios/${uid}/reporte/sdate=${sdate.toString()}&edate=${edate.toString()}`
+      this.http.get(apiUrl)
+        .toPromise()
+        .then(
+          res => {
+            console.log(res.json());
+            resolve();
+          }
+        )
+    });
   }
 
   agregarReporte(reporte: Reporte) {

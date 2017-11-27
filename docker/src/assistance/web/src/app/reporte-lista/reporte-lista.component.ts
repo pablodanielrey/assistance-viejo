@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Reporte } from '../reporte';
 import { AsistenciaService } from '../asistencia.service';
 
+
 @Component({
   selector: 'app-reporte-lista',
   templateUrl: './reporte-lista.component.html',
@@ -22,7 +23,7 @@ export class ReporteListaComponent implements OnInit {
     var uid = '41402561-94d7-4759-bf06-8247dc90fc75';
     var sdate = new Date();
     var edate = new Date();
-    this.reportes = this.asistenciaService.buscarReporte(uid, sdate, edate);
+    let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);
   }
 
   agregarReporte() {
