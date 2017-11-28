@@ -70,10 +70,4 @@ class HorasTrabajadas(MyJsonBaseClass):
 
             hs.append(h)
 
-
-        for h in hs:
-            if h.logs:
-                for l in h.logs:
-                    logging.info('logs de horas trabajadas : {}'.format(l.__json__()))
-
         return hs
