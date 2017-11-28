@@ -16,6 +16,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
 
 import { Reporte } from './entities/reporte';
+import { Dispositivo } from './entities/dispositivo';
 
 
 
@@ -27,6 +28,20 @@ export class AsistenciaService {
   // reportes: Reporte[] = [];
 
   constructor(private http: HttpClient) { }
+
+  buscarDispositivos(): Promise<Dispositivo[]> {
+    return new Promise((resolve, reject) => {
+      let apiUrl = `${ASSISTANCE_API_URL}/dispositivos`
+      this.http.get<string[]>(apiUrl)
+        .toPromise()
+        .then(
+          res => {
+            resolve(res.map(d => new Dispositivo(d)));
+          }
+        )
+    });
+  }
+
 
   buscarReporte(uid: string, sdate: Date, edate: Date): Promise<Reporte[]> {
     return new Promise((resolve, reject) => {

@@ -10,11 +10,13 @@ import { AsistenciaService } from './asistencia.service';
 
 import { AppComponent } from './app.component';
 import { ReporteListaComponent } from './reporte-lista/reporte-lista.component';
+import { ListaDispositivosComponent } from './lista-dispositivos/lista-dispositivos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReporteListaComponent
+    ReporteListaComponent,
+    ListaDispositivosComponent
   ],
   imports: [
     BrowserModule,
