@@ -18,4 +18,12 @@ export class Horario {
 
   }
 
+  obtenerEntrada(date: Date) {
+    return new Date(date.getTime() + this.inicio * 1000);
+  }
+
+  obtenerSalida(date: Date) {
+    return date ? new Date(date.getTime() + this.fin * 1000) : null;
+  }
+
 }

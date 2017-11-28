@@ -13,12 +13,18 @@ export class Reporte {
   constructor(o:Object) {
     try {
       Object.assign(this, o);
-      this.fecha = new Date(this.fecha);
+      this.fecha = this.parsearFecha(new Date(this.fecha));
       this.horario = new Horario(this.horario);
       this.horasTrabajadas = this.horasTrabajadas.map(h => new HorasTrabajadas(h));
     } catch (e) {
       console.log(e);
     }
+  }
+
+  parsearFecha(date: Date) {
+    let d = new Date();
+    d.setTime(date.getTime() + d.getTimezoneOffset()*60*1000);
+    return d;
   }
 
 

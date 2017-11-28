@@ -1,7 +1,9 @@
 
 <div>
-  <button (click)="buscar()">Buscar</button>
+  Inicio:
   <input type="date" [(ngModel)]="sDate" [value]="sDate" (ngModelChange)="sDate = $event">
+  Fin <input type="date" [(ngModel)]="eDate" [value]="eDate" (ngModelChange)="eDate = $event">
+  <button (click)="buscar()">Buscar</button>
 </div>
 <div *ngIf="reportes.length < 1; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>No hay Resultados</ng-template>
@@ -22,10 +24,10 @@
     <td>{{rep.usuario_id}}</td>
     <td>{{rep.fecha  | date: 'dd/MM/yyyy'}}</td>
     <td>{{rep.horario.dia}}</td>
-    <td>{{rep.horario.inicio}}</td>
-    <td>{{rep.horario.fin}}</td>
-    <td>{{obtenerMarcacionEntrada(rep)}}</td>
-    <td>{{obtenerMarcacionSalida(rep)}}</td>
+    <td>{{rep.horario.obtenerEntrada(rep.fecha) | date: 'HH:mm'}}</td>
+    <td>{{rep.horario.obtenerSalida(rep.fecha) | date: 'HH:mm'}}</td>
+    <td>{{obtenerMarcacionEntrada(rep) | date: 'hh:mm'}}</td>
+    <td>{{obtenerMarcacionSalida(rep) | date: 'hh:mm'}}</td>
     <td>{{rep.total_segundos_trabajados}}</td>
   </tr>
 </table>
