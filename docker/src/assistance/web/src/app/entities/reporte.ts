@@ -1,24 +1,21 @@
+import { Horario } from './horario'
+import { HorasTrabajadas } from './horas-trabajadas'
+
 export class Reporte {
 
-  // horasTrabajadas: HorasTrabajadas[]
   total_segundos_trabajados: number;
   fecha: Date;
-  // horario: Horario;
-  // usuario_id: string;
+  horario: Horario;
+  horasTrabajadas: HorasTrabajadas[];
+  usuario_id: string;
 
 
   constructor(o:Object) {
     try {
-      console.log(o);
       Object.assign(this, o);
       this.fecha = new Date(this.fecha);
-      console.log(this.fecha);
-
-
-      console.log('ahroa si convertido al objeto');
-      console.log(<Reporte>o);
-
-
+      this.horario = new Horario(this.horario);
+      this.horasTrabajadas = this.horasTrabajadas.map(h => new HorasTrabajadas(h));
     } catch (e) {
       console.log(e);
     }
