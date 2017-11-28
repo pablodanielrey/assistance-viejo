@@ -1,24 +1,16 @@
 export class Reporte {
 
-  // horasTrabajadas: HorasTrabajadas
+  // horasTrabajadas: HorasTrabajadas[]
   total_segundos_trabajados: number;
-  // fecha: Date;
+  fecha: Date;
   // horario: Horario;
   // usuario_id: string;
 
 
-  contructor(values: Object = {}) {
-    Object.assign(this, values);
-  }
-
-/*
-  constructor(total_segundos_trabajados: number = 0) {
-    this.total_segundos_trabajados = total_segundos_trabajados;
-  }
-  */
-
-  public initialize(values: Object = {}) {
-    Object.assign(this, values);
+  constructor(o:Object) {
+    Object.assign(this, o);
+    this.fecha = Date.parse(o['fecha']);
+    console.log(this.fecha);
   }
 
 
