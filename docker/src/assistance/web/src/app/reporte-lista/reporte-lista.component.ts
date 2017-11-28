@@ -10,7 +10,7 @@ import { AsistenciaService } from '../asistencia.service';
 })
 export class ReporteListaComponent implements OnInit {
 
-  nuevoReporte: Reporte = new Reporte();
+  nuevoReporte: Reporte;
   reportes: Reporte[] = [];
   sDate: Date = new Date();
 

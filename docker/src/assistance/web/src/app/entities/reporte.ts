@@ -9,7 +9,7 @@ export class Reporte {
 
   constructor(o:Object) {
     Object.assign(this, o);
-    this.fecha = Date.parse(o['fecha']);
+    this.fecha = new Date(Date.parse(o['fecha']));
     console.log(this.fecha);
   }
 
