@@ -2,6 +2,7 @@ from . import *
 
 from model_utils import MyJsonBaseClass
 import datetime
+import logging
 
 class HorasTrabajadas(MyJsonBaseClass):
 
@@ -44,6 +45,8 @@ class HorasTrabajadas(MyJsonBaseClass):
 
             except IndexError as e:
                 ls.append([l])
+
+        ''' para que tenga marcaciones pares '''
         if len(ls) % 2 > 0:
             ls.append(None)
 
@@ -53,9 +56,24 @@ class HorasTrabajadas(MyJsonBaseClass):
         for linicio, lfin in [(ls[i],ls[i+1]) for i in range(0,len(ls),2)]:
             h = None
             if lfin is None or len(lfin) <= 0:
-                h = HorasTrabajadas(fecha, logs=linicio, inicio=linicio[0].log, fin=None)
+                logs = [l for l in linicio]
+                inicio = linicio[0].log
+                fin = None
+                h = HorasTrabajadas(fecha, logs=logs, inicio=inicio, fin=fin)
             else:
-                h = HorasTrabajadas(fecha, logs=linicio.extend(lfin), inicio=linicio[0].log, fin=lfin[-1].log)
+                inicio = linicio[0].log
+                fin = lfin[-1].log
+                logs = []
+                logs.extend(linicio)
+                logs.extend(lfin)
+                h = HorasTrabajadas(fecha, logs=logs, inicio=inicio, fin=fin)
+
             hs.append(h)
+
+
+        for h in hs:
+            if h.logs:
+                for l in h.logs:
+                    logging.info('logs de horas trabajadas : {}'.format(l.__json__()))
 
         return hs

@@ -37,7 +37,8 @@ def obtenerReporte(uid):
     fin_str = request.args.get('edate', None)
     fin = parser.parse(fin_str) if fin_str else datetime.date.today()
 
-    return AssistanceModel.generarReporte(inicio, fin, uid)
+    reporte = AssistanceModel.generarReporte(inicio, fin, uid)
+    return reporte
 
 
 @app.after_request
