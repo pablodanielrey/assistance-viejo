@@ -34,7 +34,7 @@ class Reporte(MyJsonBaseClass):
 
             ht = HorasTrabajadas.obtenerHorasTrabajadas(session, horario, uid, actual.date())
             ht = [] if ht is None else ht
-            r = Reporte(uid=uid, fecha=actual.date(), horario=horario, HorasTrabajadas=ht)
+            r = Reporte(uid=uid, fecha=actual.date(), horario=horario, horasTrabajadas=ht)
             reportes.append(r)
 
         return reportes
