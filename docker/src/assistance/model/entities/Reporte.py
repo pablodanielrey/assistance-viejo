@@ -32,9 +32,9 @@ class Reporte(MyJsonBaseClass):
             q = q.order_by(Horario.vigencia_desde.desc())
             horario = q.limit(1).one_or_none()
 
-            ht = HorasTrabajadas.obtenerHorasTrabajadas(session, horario, uid, actual)
+            ht = HorasTrabajadas.obtenerHorasTrabajadas(session, horario, uid, actual.date())
             ht = [] if ht is None else ht
-            r = Reporte(uid, actual, horario, ht)
+            r = Reporte(uid=uid, fecha=actual.date(), horario=horario, horasTrabajadas=ht)
             reportes.append(r)
 
         return reportes
