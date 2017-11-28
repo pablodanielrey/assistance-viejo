@@ -21,9 +21,10 @@ export class ReporteListaComponent implements OnInit {
   }
 
   buscar() {
-    var uid = '41402561-94d7-4759-bf06-8247dc90fc75';
+    //let uid = '41402561-94d7-4759-bf06-8247dc90fc75';
+    let uid = '89d88b81-fbc0-48fa-badb-d32854d3d93a';
 
-    var edate = new Date();
+    let edate = new Date();
     let sdate = new Date(this.sDate);
     console.log(sdate);
     console.log(edate);

@@ -8,9 +8,20 @@ export class Reporte {
 
 
   constructor(o:Object) {
-    Object.assign(this, o);
-    this.fecha = Date.parse(o['fecha']);
-    console.log(this.fecha);
+    try {
+      console.log(o);
+      Object.assign(this, o);
+      this.fecha = new Date(this.fecha);
+      console.log(this.fecha);
+
+
+      console.log('ahroa si convertido al objeto');
+      console.log(<Reporte>o);
+
+
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 
