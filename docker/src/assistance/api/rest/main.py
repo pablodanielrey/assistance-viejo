@@ -40,6 +40,11 @@ def obtenerReporte(uid):
     reporte = AssistanceModel.generarReporte(inicio, fin, uid)
     return reporte
 
+@app.route('/assistance/api/v1.0/dispositivos', methods=['GET'])
+@jsonapi
+def obtenerDispositivos():
+    return DispositivosModel.obtenerDispositivos()
+
 
 @app.after_request
 def cors_after_request(response):

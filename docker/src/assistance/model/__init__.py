@@ -1,3 +1,4 @@
+import logging
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.schema import CreateSchema
@@ -26,5 +27,12 @@ def crear_tablas():
     from .entities import AttLog, Horario, Usuario
     from sqlalchemy.schema import CreateSchema
 
-    engine.execute(CreateSchema('assistance'))
-    Base.metadata.create_all(engine)
+    try:
+        engine.execute(CreateSchema('assistance'))
+    except Exception as e:
+        logging.exception(e)
+
+    try:
+        Base.metadata.create_all(engine)
+    except Exception as e:
+        logging.exception(e)
