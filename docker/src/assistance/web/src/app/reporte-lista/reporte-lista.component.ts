@@ -18,6 +18,7 @@ export class ReporteListaComponent implements OnInit {
 
   ngOnInit() {
     this.sDate = new Date();
+    this.fechaOrden = false;
   }
 
   buscar() {
@@ -38,14 +39,35 @@ export class ReporteListaComponent implements OnInit {
     });
   }
 
-  agregarReporte() {
-    /*
-    this.asistenciaService.agregarReporte(this.nuevoReporte);
-    this.buscar();
-    this.nuevoReporte = new Reporte();
-    */
+  ordenar(asc: boolean) {
+    this.fechaOrden = !this.fechaOrden;
+    if(asc) {
+      this.reportes = this.reportes.sort((h1, h2) => {
+        return h1.fecha < h2.fecha ? -1 : (h1.fecha > h2.fecha) ? 1 : 0;
+      });
+    } else {
+      this.reportes = this.reportes.sort((h2, h1) => {
+        return h1.fecha < h2.fecha ? -1 : (h1.fecha > h2.fecha) ? 1 : 0;
+      });
+    }
+
   }
 
 
+
+  obtenerMarcacionEntrada(rep: Reporte) {
+    console.log(rep);
+    return rep.horasTrabajadas.length < 1 ? null : rep.horasTrabajadas[0].inicio;
+    /*
+    let ht = ((rep.horasTrabajadas is null ) ? null : rep.horasTrabajadas[0]);
+    ht = ((rep.horasTrabajadas == null and rep.horasTrabajadas.length < 1) ? null : rep.horasTrabajadas[0]);
+    return (ht.inicio is undefined or  ht.inicio is null)? 0 : ht.inicio;
+    */
+  }
+
+  obtenerMarcacionSalida(rep: Reporte) {
+    let ht = (rep.horasTrabajadas is null && rep.horasTrabajadas.length <= 0 ? null : rep.horasTrabajadas[rep.horasTrabajadas.length - 1]);
+    return (ht.fin is undefined or  ht.fin is null)? 0 : ht.fin;
+  }
 
 }

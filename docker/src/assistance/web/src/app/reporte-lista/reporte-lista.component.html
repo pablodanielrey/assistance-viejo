@@ -1,11 +1,32 @@
 
-<button (click)="buscar()">Buscar</button>
-<input type="date" [(ngModel)]="sDate" [value]="sDate" (ngModelChange)="sDate = $event">
-<div>Fecha seleccionada {{sDate}}</div>
-<ul>
-  <li *ngFor="let reporte of reportes" >
-    <div> Horas trabajadas: {{ reporte.total_segundos_trabajados }} </div>
-    <div> Fecha: {{reporte.fecha}} </div>
-    <input [(ngModel)]="reporte.total_segundos_trabajados" placeholder="horas trabajadas">
-  </li>
-</ul>
+<div>
+  <button (click)="buscar()">Buscar</button>
+  <input type="date" [(ngModel)]="sDate" [value]="sDate" (ngModelChange)="sDate = $event">
+</div>
+<div *ngIf="reportes.length < 1; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>No hay Resultados</ng-template>
+<ng-template #elseBlock>
+  <table border="1">
+  <tr>
+    <th>Usuario</th>
+    <th (click)="ordenar(fechaOrden)">Fecha</th>
+    <th>Día</th>
+    <th>Horario Entrada</th>
+    <th>Horario Salida</th>
+    <th>Entrada</th>
+    <th>Salida</th>
+    <th>Horas trabajadas</th>
+
+  </tr>
+  <tr *ngFor="let rep of reportes" >
+    <td>{{rep.usuario_id}}</td>
+    <td>{{rep.fecha  | date: 'dd/MM/yyyy'}}</td>
+    <td>{{rep.horario.dia}}</td>
+    <td>{{rep.horario.inicio}}</td>
+    <td>{{rep.horario.fin}}</td>
+    <td>{{obtenerMarcacionEntrada(rep)}}</td>
+    <td>{{obtenerMarcacionSalida(rep)}}</td>
+    <td>{{rep.total_segundos_trabajados}}</td>
+  </tr>
+</table>
+</ng-template>
