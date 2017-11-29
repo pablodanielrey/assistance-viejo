@@ -34,7 +34,7 @@ class HorasTrabajadas(MyJsonBaseClass):
         tinicio, tfin = inicio - toleranciaDiaria, fin + toleranciaDiaria
 
         ''' agrupo por tolerancia los logs '''
-        for l in session.query(AttLog).filter(AttLog.log >= tinicio, AttLog.log <= tfin).all():
+        for l in session.query(AttLog).filter(AttLog.usuario_id == uid, AttLog.log >= tinicio, AttLog.log <= tfin).all():
             try:
                 grupo = ls[-1]
                 ultimo = grupo[0].log + tolerancia
