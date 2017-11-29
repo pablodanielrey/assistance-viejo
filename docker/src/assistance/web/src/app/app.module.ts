@@ -6,8 +6,6 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AsistenciaService } from './asistencia.service';
 
-
-
 import { AppComponent } from './app.component';
 import { ReporteListaComponent } from './reporte-lista/reporte-lista.component';
 import { ListaDispositivosComponent } from './lista-dispositivos/lista-dispositivos.component';

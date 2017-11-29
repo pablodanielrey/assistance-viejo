@@ -15,7 +15,9 @@
     <th>Día</th>
     <th>Horario Entrada</th>
     <th>Horario Salida</th>
+    <th>Tipo</th>
     <th>Entrada</th>
+    <th>Tipo</th>
     <th>Salida</th>
     <th>Horas trabajadas</th>
 
@@ -23,12 +25,14 @@
   <tr *ngFor="let rep of reportes" >
     <td>{{rep.usuario_id}}</td>
     <td>{{rep.fecha  | date: 'dd/MM/yyyy'}}</td>
-    <td>{{rep.horario.dia}}</td>
+    <td>{{obtenerDia(rep)}}</td>
     <td>{{rep.horario.obtenerEntrada(rep.fecha) | date: 'HH:mm'}}</td>
     <td>{{rep.horario.obtenerSalida(rep.fecha) | date: 'HH:mm'}}</td>
-    <td>{{obtenerMarcacionEntrada(rep) | date: 'hh:mm'}}</td>
-    <td>{{obtenerMarcacionSalida(rep) | date: 'hh:mm'}}</td>
-    <td>{{rep.total_segundos_trabajados}}</td>
+    <td>{{obtenerTipoMarcacionEntrada(rep)}}</td>
+    <td>{{obtenerMarcacionEntrada(rep) | date: 'HH:mm'}}</td>
+    <td>{{obtenerTipoMarcacionSalida(rep)}}</td>
+    <td>{{obtenerMarcacionSalida(rep) | date: 'HH:mm'}}</td>
+    <td>{{obtenerHorasTrabajadas(rep)}} hs</td>
   </tr>
 </table>
 </ng-template>

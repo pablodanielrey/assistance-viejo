@@ -12,6 +12,7 @@ export class Reporte {
 
   constructor(o:Object) {
     try {
+      console.log(o);
       Object.assign(this, o);
       this.fecha = this.parsearFecha(new Date(this.fecha));
       this.horario = new Horario(this.horario);

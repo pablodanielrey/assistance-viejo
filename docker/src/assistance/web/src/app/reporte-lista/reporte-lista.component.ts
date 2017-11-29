@@ -26,7 +26,8 @@ export class ReporteListaComponent implements OnInit {
   buscar() {
     let uid = '0cd70f16-aebb-4274-bc67-a57da88ab6c7';
     // let uid = '89d88b81-fbc0-48fa-badb-d32854d3d93a';
-
+    console.log(this.sDate);
+    console.log(this.eDate);
     let sdate = new Date(this.sDate);
     let edate = new Date(this.eDate);
     let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);
@@ -54,16 +55,36 @@ export class ReporteListaComponent implements OnInit {
   }
 
 
+  obtenerHorasTrabajadas(rep:Reporte) {
+    let min_total =  rep.total_segundos_trabajados / 60;
+    let min = Math.ceil(min_total % 60);
+    let hs = Math.trunc(min_total / 60);
+    let min_str = min < 10 ? '0' + min : min;
+    return hs + ':' + min_str;
+  }
 
   obtenerMarcacionEntrada(rep: Reporte) {
-    console.log(rep);
     return rep.horasTrabajadas.length < 1 ? null : rep.horasTrabajadas[0].inicio;
+  }
+
+  obtenerTipoMarcacionEntrada(rep: Reporte) {
+    return rep.horasTrabajadas.length < 1 ? null : rep.horasTrabajadas[0].logs[0].modo_verificacion;
   }
 
   obtenerMarcacionSalida(rep: Reporte) {
     let ht = (rep.horasTrabajadas.length <= 0 ? null : rep.horasTrabajadas[rep.horasTrabajadas.length - 1]);
-    return ht.fin;
+    return ht == null ? null : ht.fin;
+  }
 
+  obtenerTipoMarcacionSalida(rep: Reporte) {
+    let ht = (rep.horasTrabajadas.length <= 0 ? null : rep.horasTrabajadas[rep.horasTrabajadas.length - 1]);
+    console.log(ht);
+    return ht == null  || ht.fin == null ? null : ht.logs[ht.logs.length - 1].modo_verificacion;
+  }
+
+  obtenerDia(rep:Reporte) {
+    let semana = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+    return semana[rep.horario.dia];
   }
 
 }
