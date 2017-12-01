@@ -1,13 +1,56 @@
 
 <div>
-  Inicio:
-  <input type="date" [(ngModel)]="sDate" [value]="sDate" (ngModelChange)="sDate = $event">
-  Fin <input type="date" [(ngModel)]="eDate" [value]="eDate" (ngModelChange)="eDate = $event">
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Inicio:" [(ngModel)]="sDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker2" placeholder="Fin:" [(ngModel)]="eDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+
   <button (click)="buscar()">Buscar</button>
 </div>
 <div *ngIf="reportes.length < 1; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>No hay Resultados</ng-template>
 <ng-template #elseBlock>
+
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource2" matSort>
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+
   <table border="1">
   <tr>
     <th>Usuario</th>

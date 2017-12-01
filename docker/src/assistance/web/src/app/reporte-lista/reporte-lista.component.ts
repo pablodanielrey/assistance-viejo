@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Reporte } from '../entities/reporte';
 import { AsistenciaService } from '../asistencia.service';
 
+import {MatTableDataSource, MatSort} from '@angular/material';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-reporte-lista',
   templateUrl: './reporte-lista.component.html',
   styleUrls: ['./reporte-lista.component.css']
 })
+
+
+
 export class ReporteListaComponent implements OnInit {
 
   nuevoReporte: Reporte;
@@ -15,6 +21,9 @@ export class ReporteListaComponent implements OnInit {
   sDate: Date = new Date();
   eDate: Date = new Date();
   fechaOrden: boolean;
+
+   displayedColumns = ['position', 'name', 'weight', 'symbol'];
+   dataSource2 = new MatTableDataSource(ELEMENT_DATA);
 
   constructor(private asistenciaService: AsistenciaService) { }
 
@@ -24,6 +33,7 @@ export class ReporteListaComponent implements OnInit {
   }
 
   buscar() {
+
     let uid = '0cd70f16-aebb-4274-bc67-a57da88ab6c7';
     // let uid = '89d88b81-fbc0-48fa-badb-d32854d3d93a';
     console.log(this.sDate);
@@ -32,13 +42,10 @@ export class ReporteListaComponent implements OnInit {
     let edate = new Date(this.eDate);
     let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);
     respuesta.then(reporte => {
-      for (let r of reporte) {
-          console.log('report:');
-          console.log(r);
-      }
       this.reportes = reporte;
     });
   }
+
 
   ordenar(asc: boolean) {
     this.fechaOrden = !this.fechaOrden;
@@ -88,3 +95,15 @@ export class ReporteListaComponent implements OnInit {
   }
 
 }
+
+export interface Element {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+const ELEMENT_DATA: Element[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'}
+]
