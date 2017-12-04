@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Boolean, D
 from sqlalchemy.orm import relationship
 from model_utils import Base
 import datetime
+from dateutil.tz import tzlocal
 
 class Horario(Base):
 
@@ -36,7 +37,8 @@ class Horario(Base):
         return self.dia.weekday()
 
     def obtenerHorario(self, fecha):
-        dt = datetime.datetime.combine(fecha, datetime.time(0))
+        dateutil_tz = tzlocal()
+        dt = datetime.datetime.combine(fecha, datetime.time(0), dateutil_tz)
         if self.diario:
             inicio = dt
             fin = dt + datetime.timedelta(hours=24)
