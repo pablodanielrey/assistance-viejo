@@ -12,8 +12,7 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 
-
-  <button (click)="buscar()">Buscar</button>
+  <button mat-raised-button (click)="buscar()" color="primary">Buscar</button>
 </div>
 <div *ngIf="reportes.length < 1; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>No hay Resultados</ng-template>
@@ -22,27 +21,55 @@
 
   <div class="example-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource2" matSort>
-      <ng-container matColumnDef="position">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+
+      <ng-container matColumnDef="usuario_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.usuario_id}} </mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.fecha | date: 'dd/MM/yyyy'}} </mat-cell>
       </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+      <ng-container matColumnDef="dia">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dia </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerDia(element)}} </mat-cell>
       </ng-container>
 
-      <!-- Color Column -->
-      <ng-container matColumnDef="symbol">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+      <ng-container matColumnDef="hentrada">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Horario Entrada </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.horario.obtenerEntrada(element.fecha) | date: 'HH:mm'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hsalida">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Horario Salida </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.horario.obtenerSalida(element.fecha) | date: 'HH:mm'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tentrada">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerTipoMarcacionEntrada(element)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="entrada">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Entrada </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerMarcacionEntrada(element) | date: 'HH:mm'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tsalida">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerTipoMarcacionSalida(element)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="salida">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Salida </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerMarcacionSalida(element) | date: 'HH:mm'}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hstrabajadas">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Horas Trabajadas </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{obtenerHorasTrabajadas(element)}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -50,32 +77,4 @@
     </mat-table>
   </div>
 
-
-  <table border="1">
-  <tr>
-    <th>Usuario</th>
-    <th (click)="ordenar(fechaOrden)">Fecha</th>
-    <th>Día</th>
-    <th>Horario Entrada</th>
-    <th>Horario Salida</th>
-    <th>Tipo</th>
-    <th>Entrada</th>
-    <th>Tipo</th>
-    <th>Salida</th>
-    <th>Horas trabajadas</th>
-
-  </tr>
-  <tr *ngFor="let rep of reportes" >
-    <td>{{rep.usuario_id}}</td>
-    <td>{{rep.fecha  | date: 'dd/MM/yyyy'}}</td>
-    <td>{{obtenerDia(rep)}}</td>
-    <td>{{rep.horario.obtenerEntrada(rep.fecha) | date: 'HH:mm'}}</td>
-    <td>{{rep.horario.obtenerSalida(rep.fecha) | date: 'HH:mm'}}</td>
-    <td>{{obtenerTipoMarcacionEntrada(rep)}}</td>
-    <td>{{obtenerMarcacionEntrada(rep) | date: 'HH:mm'}}</td>
-    <td>{{obtenerTipoMarcacionSalida(rep)}}</td>
-    <td>{{obtenerMarcacionSalida(rep) | date: 'HH:mm'}}</td>
-    <td>{{obtenerHorasTrabajadas(rep)}} hs</td>
-  </tr>
-</table>
 </ng-template>

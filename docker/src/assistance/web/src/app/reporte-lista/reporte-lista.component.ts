@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Reporte } from '../entities/reporte';
 import { AsistenciaService } from '../asistencia.service';
 
@@ -22,8 +22,10 @@ export class ReporteListaComponent implements OnInit {
   eDate: Date = new Date();
   fechaOrden: boolean;
 
-   displayedColumns = ['position', 'name', 'weight', 'symbol'];
-   dataSource2 = new MatTableDataSource(ELEMENT_DATA);
+   displayedColumns = ['usuario_id', 'fecha', 'dia', 'hentrada', 'hsalida','tentrada','entrada','tsalida','salida', 'hstrabajadas'];
+   dataSource2 =  new MatTableDataSource(this.reportes);
+   @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(private asistenciaService: AsistenciaService) { }
 
@@ -32,17 +34,19 @@ export class ReporteListaComponent implements OnInit {
     this.fechaOrden = false;
   }
 
+  ngAfterViewInit() {
+    this.dataSource2.sort = this.sort;
+  }
+
   buscar() {
 
     let uid = '0cd70f16-aebb-4274-bc67-a57da88ab6c7';
-    // let uid = '89d88b81-fbc0-48fa-badb-d32854d3d93a';
-    console.log(this.sDate);
-    console.log(this.eDate);
     let sdate = new Date(this.sDate);
     let edate = new Date(this.eDate);
     let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);
     respuesta.then(reporte => {
       this.reportes = reporte;
+      this.dataSource2 = new MatTableDataSource(this.reportes);
     });
   }
 
