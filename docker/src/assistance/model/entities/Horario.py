@@ -28,17 +28,16 @@ class Horario(Base):
 
 
     def obtenerInicio(self, date):
-        return date.replace(seconds=0, hour=0, minute=0) + datetime.timedelta(seconds=self.inicio)
+        return date.replace(hour=0, minute=0, second=0,microsecond=0) + datetime.timedelta(seconds=self.inicio)
 
     def obtenerFin(self, date):
-        return date.replace(seconds=0, hour=0, minute=0) + datetime.timedelta(seconds=self.fin)
+        return date.replace(hour=0, minute=0,second=0,microsecond=0) + datetime.timedelta(seconds=self.fin)
 
     def obtenerDiaSemanal(self):
         return self.dia.weekday()
 
-    def obtenerHorario(self, fecha):
-        dateutil_tz = tzlocal()
-        dt = datetime.datetime.combine(fecha, datetime.time(0), dateutil_tz)
+    def obtenerHorario(self, fecha, timezone=tzlocal()):
+        dt = datetime.datetime.combine(fecha, datetime.time(0), timezone)
         if self.diario:
             inicio = dt
             fin = dt + datetime.timedelta(hours=24)
