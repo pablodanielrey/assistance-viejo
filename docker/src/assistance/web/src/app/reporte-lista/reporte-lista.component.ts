@@ -40,7 +40,8 @@ export class ReporteListaComponent implements OnInit {
 
   buscar() {
 
-    let uid = '0cd70f16-aebb-4274-bc67-a57da88ab6c7';
+    // let uid = '0cd70f16-aebb-4274-bc67-a57da88ab6c7';
+    let uid = 'b7c8fe8e-cc4e-4ede-aa3c-4cd411e91424';
     let sdate = new Date(this.sDate);
     let edate = new Date(this.eDate);
     let respuesta = this.asistenciaService.buscarReporte(uid, sdate, edate);

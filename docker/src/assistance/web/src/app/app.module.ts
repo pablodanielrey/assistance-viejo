@@ -11,19 +11,23 @@ import { AsistenciaService } from './asistencia.service';
 import { AppComponent } from './app.component';
 import { ReporteListaComponent } from './reporte-lista/reporte-lista.component';
 import { ListaDispositivosComponent } from './lista-dispositivos/lista-dispositivos.component';
+import { MenuComponent } from './menu/menu.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReporteListaComponent,
-    ListaDispositivosComponent
+    ListaDispositivosComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [AsistenciaService],
   bootstrap: [AppComponent]
