@@ -18,6 +18,9 @@ class Dispositivo(Base):
     fecha_del_producto = Column(DateTime)
     url = Column(String)
     algoritmo = Column(String)
+    habilitado = Column(Boolean)
+    descripcion = Column(String)
+    eliminado = Column(DateTime)
 
     #usuario_id = Column(String, ForeignKey('assistance.usuario.id'))
     #usuario = relationship('Usuario')

@@ -1,0 +1,19 @@
+.encabezado {
+
+}
+
+.encabezado h2 {
+  display: inline;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+form {
+  width: 50%;
+}
+
+.grupo-form {
+  width: 100%;
+}

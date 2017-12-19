@@ -1,3 +1,13 @@
-<p>
-  lista-dispositivos works!
-</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Administración de Relojes</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<div>
+  <span> RELOJES</span>
+  <button mat-raised-button color="primary" routerLink="/editar-dispositivo">+ Nuevo Reloj</button>
+</div>
+<mat-list>
+  <mat-list-item *ngFor="let item of dispositivos"> {{dispositivo.nombre}} </mat-list-item>
+</mat-list>

@@ -13,13 +13,17 @@ import { ReporteListaComponent } from './reporte-lista/reporte-lista.component';
 import { ListaDispositivosComponent } from './lista-dispositivos/lista-dispositivos.component';
 import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { EditarDispositivoComponent } from './editar-dispositivo/editar-dispositivo.component';
+import { DetalleDispositivoComponent } from './detalle-dispositivo/detalle-dispositivo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReporteListaComponent,
     ListaDispositivosComponent,
-    MenuComponent
+    MenuComponent,
+    EditarDispositivoComponent,
+    DetalleDispositivoComponent
   ],
   imports: [
     BrowserModule,

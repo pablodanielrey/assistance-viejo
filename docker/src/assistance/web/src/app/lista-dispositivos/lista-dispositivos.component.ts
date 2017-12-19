@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+import { Dispositivo } from '../entities/dispositivo';
 
 import { AsistenciaService } from '../asistencia.service';
 
@@ -9,6 +14,7 @@ import { AsistenciaService } from '../asistencia.service';
 })
 export class ListaDispositivosComponent implements OnInit {
 
+  dispositivos: Dispositivo[] = [];
   constructor(private service: AsistenciaService) { }
 
   buscarDispositivos(service: AsistenciaService) {

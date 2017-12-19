@@ -1,0 +1,67 @@
+<form (ngSubmit)="guardar()" #detalleDispositivo="ngForm">
+  <div class="encabezado">
+    <h2>Configuración</h2>
+    <mat-slide-toggle [(ngModel)]="dispositivo.habilitado" name="habilitado"></mat-slide-toggle>
+    <button mat-icon-button>
+      <mat-icon aria-label="Example icon-button with a heart icon">eliminar</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field class="input-full-width">
+    <input matInput placeholder="Nombre" [(ngModel)]="dispositivo.nombre" name="nombre">
+  </mat-form-field>
+
+  <mat-form-field class="input-full-width">
+    <input matInput placeholder="Descripción" [(ngModel)]="dispositivo.descripcion" name="descripcion">
+  </mat-form-field>
+
+  <div class="grupo-form">
+    <mat-form-field>
+      <input matInput placeholder="IP" [(ngModel)]="dispositivo.ip" name="ip">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Puerta de Enlace" [(ngModel)]="dispositivo.router" name="router">
+    </mat-form-field>
+  </div>
+
+  <div class="grupo-form">
+    <mat-form-field>
+      <input matInput placeholder="Máscara de subred" [(ngModel)]="dispositivo.mascara" name="mascara">
+    </mat-form-field>
+  </div>
+
+  <div class="grupo-form">
+    <mat-form-field>
+      <input matInput placeholder="MAC" [(ngModel)]="dispositivo.mac" name="mac">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Modelo" [(ngModel)]="dispositivo.modelo" name="modelo">
+    </mat-form-field>
+  </div>
+
+  <div class="grupo-form">
+    <mat-form-field>
+      <input matInput placeholder="Serial" [(ngModel)]="dispositivo.serial" name="serial">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Fecha Instalación" [(ngModel)]="dispositivo.fecha_del_producto" name="fecha_del_producto">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="grupo-form">
+    <mat-form-field>
+      <input matInput placeholder="SOAP url" [(ngModel)]="dispositivo.url" name="url">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Algoritmo" [(ngModel)]="dispositivo.algoritmo" name="algoritmo">
+    </mat-form-field>
+  </div>
+
+  <button type="submit" mat-raised-button color="primary" [disabled]="!detalleDispositivo.form.valid">Guardar</button>
+</form>

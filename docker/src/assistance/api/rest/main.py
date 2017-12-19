@@ -5,6 +5,7 @@ from dateutil import parser
 
 from flask import Flask, abort, make_response, jsonify, url_for, request, json
 from assistance.model.AssistanceModel import AssistanceModel
+from assistance.model.DispositivosModel import DispositivosModel
 from flask_jsontools import jsonapi
 from dateutil import parser
 import datetime
