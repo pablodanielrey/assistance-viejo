@@ -9,5 +9,9 @@
   <button mat-raised-button color="primary" routerLink="/editar-dispositivo">+ Nuevo Reloj</button>
 </div>
 <mat-list>
-  <mat-list-item *ngFor="let item of dispositivos"> {{dispositivo.nombre}} </mat-list-item>
+  <mat-list-item *ngFor="let item of dispositivos" routerLink="/editar-dispositivo/{{item.id}}">
+    <mat-icon mat-list-icon>access_time</mat-icon>
+    <h4 mat-line>{{item.nombre}}</h4>
+    <p mat-line>{{item.descripcion}}</p>
+  </mat-list-item>
 </mat-list>

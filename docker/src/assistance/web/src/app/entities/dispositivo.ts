@@ -21,8 +21,8 @@ export class Dispositivo {
 
   constructor(o:Object) {
     Object.assign(this, o);
-    this.creado = new Date(this.creado);
-    this.actualizado = new Date(this.actualizado);
+    this.creado = (this.creado == null ? null : new Date(this.creado));
+    this.actualizado = (this.actualizado == null ? null : new Date(this.actualizado));
   }
 
 

@@ -26,12 +26,12 @@ __all__ = [
 def crear_tablas():
     from .entities import AttLog, Horario, Usuario
     from sqlalchemy.schema import CreateSchema
-
+    '''
     try:
         engine.execute(CreateSchema('assistance'))
     except Exception as e:
         logging.exception(e)
-
+    '''
     try:
         Base.metadata.create_all(engine)
     except Exception as e:

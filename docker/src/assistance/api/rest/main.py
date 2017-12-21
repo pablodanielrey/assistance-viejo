@@ -10,6 +10,9 @@ from flask_jsontools import jsonapi
 from dateutil import parser
 import datetime
 
+
+from assistance.model import Session
+
 from rest_utils import register_encoder
 
 
@@ -44,8 +47,33 @@ def obtenerReporte(uid):
 @app.route('/assistance/api/v1.0/dispositivos', methods=['GET'])
 @jsonapi
 def obtenerDispositivos():
-    return DispositivosModel.obtenerDispositivos()
+    session = Session()
+    try:
+        return DispositivosModel.obtenerDispositivos(session)
+    finally:
+        session.close()
 
+@app.route('/assistance/api/v1.0/dispositivo/<uid>', methods=['PUT','POST'])
+@jsonapi
+def actualizar_dispositivo(uid):
+    datos = json.loads(request.data)
+    session = Session()
+    try:
+        DispositivosModel.actualizarDispositivo(session, uid, datos)
+        session.commit()
+    finally:
+        session.close()
+
+@app.route('/assistance/api/v1.0/dispositivo/', methods=['PUT','POST'])
+@jsonapi
+def crear_dispositivo():
+    datos = json.loads(request.data)
+    session = Session()
+    try:
+        DispositivosModel.crearDispositivo(session, datos)
+        session.commit()
+    finally:
+        session.close()
 
 @app.after_request
 def cors_after_request(response):

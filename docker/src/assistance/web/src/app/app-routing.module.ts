@@ -8,6 +8,7 @@ import { DetalleDispositivoComponent } from './detalle-dispositivo/detalle-dispo
 const routes: Routes = [
   { path: 'reportes', component: ReporteListaComponent },
   { path: 'dispositivos', component: ListaDispositivosComponent },
+  { path: 'editar-dispositivo/:id', component: EditarDispositivoComponent },
   { path: 'editar-dispositivo', component: EditarDispositivoComponent },
   { path: 'detalle-dispositivo', component: DetalleDispositivoComponent }
 ];

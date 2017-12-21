@@ -19,9 +19,8 @@ export class ListaDispositivosComponent implements OnInit {
 
   buscarDispositivos(service: AsistenciaService) {
     service.buscarDispositivos().then(ds => {
-      for (let d of ds) {
-        console.log(ds);
-      }
+      console.log(ds[0]);
+      this.dispositivos = ds;
     });
   }
 

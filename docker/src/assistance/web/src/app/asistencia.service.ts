@@ -60,6 +60,20 @@ export class AsistenciaService {
     });
   }
 
+
+  crearDispositivo(dispositivo: Dispositivo): Promise<Dispositivo[]> {
+    return new Promise((resolve, reject) => {
+      let apiUrl = `${ASSISTANCE_API_URL}/dispositivo/`
+      this.http.post<string[]>(apiUrl, dispositivo)
+        .toPromise()
+        .then(
+          res => {
+            resolve(res.map(k => new Dispositivo(k)));
+          }
+        )
+    });
+  }
+
   agregarReporte(reporte: Reporte) {
     // this.reportes.push(reporte);
   }

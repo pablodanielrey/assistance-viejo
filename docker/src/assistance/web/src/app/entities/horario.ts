@@ -12,9 +12,9 @@ export class Horario {
   constructor(o:Object) {
     Object.assign(this, o);
 
-    this.creado = new Date(this.creado);
-    this.actualizado = new Date(this.actualizado);
-    this.vigencia_desde = new Date(this.vigencia_desde);
+    this.creado = (this.creado == null ? null : new Date(this.creado));
+    this.actualizado = (this.actualizado == null ? null : new Date(this.actualizado));
+    this.vigencia_desde = (this.vigencia_desde == null ? null : new Date(this.vigencia_desde));
 
   }
 
