@@ -45,11 +45,18 @@ def obtenerReporte(uid):
     return reporte
 
 @app.route('/assistance/api/v1.0/dispositivos', methods=['GET'])
+@app.route('/assistance/api/v1.0/dispositivos/<id>', methods=['GET'])
 @jsonapi
-def obtenerDispositivos():
+def obtenerDispositivos(id=None):
     session = Session()
     try:
-        return DispositivosModel.obtenerDispositivos(session)
+        if id:
+            d = DispositivosModel.obtenerDispositivo(session, id)
+            return d
+        else:
+            disp =  DispositivosModel.obtenerDispositivos(session)
+            logging.info(json.dumps(disp))
+            return disp
     finally:
         session.close()
 
@@ -70,8 +77,10 @@ def crear_dispositivo():
     datos = json.loads(request.data)
     session = Session()
     try:
-        DispositivosModel.crearDispositivo(session, datos)
-        session.commit()
+        d = DispositivosModel.crearDispositivo(session, datos)
+        # session.commit()
+        logging.info(d.__dict__)
+        return d.id
     finally:
         session.close()
 

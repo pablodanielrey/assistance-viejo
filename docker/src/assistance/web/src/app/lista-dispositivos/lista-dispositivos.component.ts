@@ -7,6 +7,9 @@ import { Dispositivo } from '../entities/dispositivo';
 
 import { AsistenciaService } from '../asistencia.service';
 
+import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-lista-dispositivos',
   templateUrl: './lista-dispositivos.component.html',
@@ -15,17 +18,21 @@ import { AsistenciaService } from '../asistencia.service';
 export class ListaDispositivosComponent implements OnInit {
 
   dispositivos: Dispositivo[] = [];
-  constructor(private service: AsistenciaService) { }
+  constructor(private service: AsistenciaService, private router: Router) { }
 
-  buscarDispositivos(service: AsistenciaService) {
-    service.buscarDispositivos().then(ds => {
+  buscarDispositivos() {
+    this.service.buscarDispositivos().then(ds => {
       console.log(ds[0]);
       this.dispositivos = ds;
     });
   }
 
   ngOnInit() {
-    this.buscarDispositivos(this.service);
+    this.buscarDispositivos();
+  }
+
+  editarDispositivo(item:Dispositivo) {
+     this.router.navigate(['/editar-dispositivo'], { queryParams: { id: item.id } });
   }
 
 }

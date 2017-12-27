@@ -42,6 +42,19 @@ export class AsistenciaService {
     });
   }
 
+  buscarDispositivo(id:String): Promise<Dispositivo> {
+    return new Promise((resolve, reject) => {
+      let apiUrl = `${ASSISTANCE_API_URL}/dispositivos/${id}`
+      this.http.get<string[]>(apiUrl)
+        .toPromise()
+        .then(
+          res => {
+            resolve(new Dispositivo(res));
+          }
+        )
+    });
+  }
+
 
   buscarReporte(uid: string, sdate: Date, edate: Date): Promise<Reporte[]> {
     return new Promise((resolve, reject) => {
@@ -61,14 +74,14 @@ export class AsistenciaService {
   }
 
 
-  crearDispositivo(dispositivo: Dispositivo): Promise<Dispositivo[]> {
+  crearDispositivo(dispositivo: Dispositivo): Promise<Dispositivo> {
     return new Promise((resolve, reject) => {
       let apiUrl = `${ASSISTANCE_API_URL}/dispositivo/`
-      this.http.post<string[]>(apiUrl, dispositivo)
+      this.http.post<Dispositivo>(apiUrl, dispositivo)
         .toPromise()
         .then(
           res => {
-            resolve(res.map(k => new Dispositivo(k)));
+            resolve(res);
           }
         )
     });

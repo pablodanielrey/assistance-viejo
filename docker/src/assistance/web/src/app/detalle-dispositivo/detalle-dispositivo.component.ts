@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { Dispositivo } from '../entities/dispositivo';
@@ -13,19 +13,27 @@ import { AsistenciaService } from '../asistencia.service';
 export class DetalleDispositivoComponent implements OnInit {
 
   submitted : boolean = false;
-  dispositivo: Dispositivo;
+  @Input() dispositivo: Dispositivo;
+  nuevo: boolean = false;
 
   constructor(private service: AsistenciaService) { }
 
   ngOnInit() {
-    this.dispositivo = new Dispositivo(null);
+    if (!this.dispositivo) {
+      this.dispositivo = new Dispositivo(null);
+      this.nuevo = true;
+    }
+    console.log(this.dispositivo);
   }
 
   guardar() {
-    console.log(this.dispositivo);
-    this.service.crearDispositivo(this.dispositivo).then(d => {
-      console.log(d);
-    });
+    if (this.nuevo) {
+      this.service.crearDispositivo(this.dispositivo).then(d => {
+        console.log(d);
+      });
+    } else {
+      console.log("Modificando");
+    }
   }
 
 }

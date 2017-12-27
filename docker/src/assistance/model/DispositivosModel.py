@@ -5,6 +5,7 @@ import datetime
 from .entities import *
 import logging
 logging.getLogger().setLevel(logging.DEBUG)
+import uuid
 
 class DispositivosModel:
 
@@ -13,22 +14,21 @@ class DispositivosModel:
         return session.query(Dispositivo).order_by(Dispositivo.id).all()
 
     @classmethod
+    def obtenerDispositivo(cls, session, id):
+        q = session.query(Dispositivo)
+        if id:
+            q = q.filter(Dispositivo.id == id)
+        return q.one()
+
+    @classmethod
     def actualizarDispositivo(cls, session, uid, datos):
         return ""
 
     @classmethod
     def crearDispositivo(cls, session, datos):
-        '''
-        s = Sincronizacion(
-            id=u['id'],
-            dni=u['dni'],
-            clave_id=clave['id'],
-            clave=clave['clave'],
-            clave_actualizada=parse(clave['actualizado']) if clave['actualizado'] and clave['actualizado'] != 'null' else parse(clave['creado']),
-            emails=emails
-        )
-        session.add(s)
-        '''
-
-        logging.info(datos)
-        return ""
+        d = Dispositivo()
+        id = str(uuid.uuid4())
+        d.id = id
+        # session.add(d)
+        logging.info(d)
+        return d

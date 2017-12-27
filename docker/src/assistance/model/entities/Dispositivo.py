@@ -1,7 +1,6 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Boolean, Date
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Boolean, Date, DateTime
 from sqlalchemy.orm import relationship
 from model_utils import Base
-import datetime
 
 class Dispositivo(Base):
 
@@ -21,9 +20,3 @@ class Dispositivo(Base):
     habilitado = Column(Boolean)
     descripcion = Column(String)
     eliminado = Column(DateTime)
-
-    #usuario_id = Column(String, ForeignKey('assistance.usuario.id'))
-    #usuario = relationship('Usuario')
-
-    def __init__(self):
-        pass

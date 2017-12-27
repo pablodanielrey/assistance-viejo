@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <mat-icon>undo</mat-icon>
-    <p>{{title}}</p>
+    <mat-icon (click)="cancelar()">undo</mat-icon>
+    <p>{{title}} - {{id}}</p>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-detalle-dispositivo></app-detalle-dispositivo>
+<app-detalle-dispositivo [dispositivo]="dispositivo"></app-detalle-dispositivo>
